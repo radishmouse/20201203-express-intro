@@ -7,28 +7,16 @@ const express = require('express');
 const app = express();
 
 const server = http.createServer(app);
-const db = require('./db');
+const routes = require('./routes');
 
-// Retrieve all
 app.get('/', (req, res) => {
-    res.json(db.allEmployees());
-});
+    res.send(`
+      <h1>Welcome to the Employee API!</h1>
+<iframe src="https://giphy.com/embed/3owyoUHuSSqDMEzVRu" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/foxhomeent-3owyoUHuSSqDMEzVRu">via GIPHY</a></p>
+    `);
+})
 
-// Retrieve one (route params)
-app.get('/id/:id', (req, res) => {
-    res.json(db.employeeById(req.params.id));
-});
-
-// Show list of ids and names
-app.get('/id/', (req, res) => {
-    res.json(db.employeeIdList());
-});
-
-
-// Search by name
-app.get('/name/:searchTerm', (req, res) => {
-    res.json(db.employeesByName(req.params.searchTerm));
-});
+app.use('/employees', routes);
 
 // Catch all (404)
 app.get('*', (req, res) => {
