@@ -1,3 +1,5 @@
+// skimming means:
+// 1. look at the requires/exports
 const http = require('http');
 
 const hostname = '0.0.0.0';
